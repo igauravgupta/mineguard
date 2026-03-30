@@ -43,3 +43,7 @@ class LLMProvider:
         response = self.model.invoke(prompt)
         self.logger.info("Received response from LLM")
         return response.content
+
+    def get_chat_model(self) -> ChatLiteLLM:
+        """Return the underlying chat model for LangChain agents/tool calls."""
+        return self.model
