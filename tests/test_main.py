@@ -1,16 +1,16 @@
 from conftest import reload_module
 
 
-class DummyProvider:
-    def generate_response(self, prompt: str) -> str:
-        return "ok"
+class DummyAgent:
+    def detect_intent(self, prompt: str) -> str:
+        return "legal query"
 
 
 def test_main_prints_response(monkeypatch, capsys):
     main_module = reload_module("main")
 
-    monkeypatch.setattr(main_module, "LLMProvider", lambda: DummyProvider())
+    monkeypatch.setattr(main_module, "QueryUnderstandAgent", lambda: DummyAgent())
     main_module.main()
 
     captured = capsys.readouterr()
-    assert "LLM response: ok" in captured.out
+    assert "Detected intent: legal query" in captured.out

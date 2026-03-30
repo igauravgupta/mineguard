@@ -16,6 +16,7 @@ class QueryUnderstandAgent:
 
     def __init__(self) -> None:
         self.logger = get_logger()
+        # TODO: Add Pydantic models when parsing structured outputs or tool calls.
         self.chat_model = LLMProvider().get_chat_model()
         self.agent = create_agent(
             model=self.chat_model,
