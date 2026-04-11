@@ -74,6 +74,11 @@ def _split_query(user_query: str) -> List[str]:
         chunk = chunk.strip()
         if not chunk:
             continue
+        if len(chunk) > QUERY_PART_MAX:
+            for start in range(0, len(chunk), QUERY_PART_MAX):
+                parts.append(chunk[start : start + QUERY_PART_MAX])
+            buffer = ""
+            continue
         candidate = f"{buffer} {chunk}".strip() if buffer else chunk
         if len(candidate) <= QUERY_PART_MAX:
             buffer = candidate
@@ -87,6 +92,20 @@ def _split_query(user_query: str) -> List[str]:
     if not parts:
         return [query[:QUERY_PART_MAX]]
     return parts
+
+
+def _normalize_results(results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    normalized = []
+    for item in results:
+        normalized.append(
+            {
+                "content": _truncate(str(item.get("content", ""))),
+                "metadata": item.get("metadata", {}),
+                "source": item.get("source", ""),
+                "query_part": item.get("query_part", ""),
+            }
+        )
+    return normalized
 
 
 def _dedupe_results(results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -124,6 +143,7 @@ class RetrievalAgent:
             results.extend(laws_rag_search.invoke({"query": part, "k": k}))
             results.extend(policies_rag_search.invoke({"query": part, "k": k}))
 
+        results = _normalize_results(results)
         results = _dedupe_results(results)
         payload = {
             "query": user_query,
