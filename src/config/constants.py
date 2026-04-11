@@ -16,6 +16,8 @@ class Constants:
     BASE_DIR = SRC_DIR.parent
     LAWS_DIR = SRC_DIR / "rag" / "data" / "laws"
     EMBEDDINGS_DIR = SRC_DIR / "rag" / "laws_rag" / "embeddings"
+    POLICIES_DIR = SRC_DIR / "rag" / "data" / "policies"
+    POLICIES_EMBEDDINGS_DIR = SRC_DIR / "rag" / "policies_rag" / "embeddings"
 
     EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
     CHUNK_SIZE = 1000
