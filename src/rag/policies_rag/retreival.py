@@ -14,7 +14,7 @@ if str(SRC_DIR) not in sys.path:
 
 from config.constants import Constants
 from config.logger import get_logger
-from indexing import load_faiss_store
+from .indexing import load_faiss_store
 
 
 logger = get_logger(__name__)
