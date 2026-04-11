@@ -1,0 +1,127 @@
+Mining Company Health and Safety Policy (Sample)
+
+Document control
+- Version: 1.0
+- Owner: HSE Department
+- Effective date: 2025-01-01
+- Review cycle: Annual or after a major incident, regulatory change, or operational change
+
+1. Purpose
+This policy sets out the Health, Safety, and Occupational Hygiene requirements for all mining operations, with the goal of preventing injury, illness, and property damage while ensuring compliance with applicable laws and good industry practice.
+
+2. Scope
+This policy applies to all employees, contractors, visitors, and activities at all sites, including exploration, construction, production, maintenance, and closure activities.
+
+3. Legal and external references
+This policy is aligned with applicable laws and regulations, including the following local laws present in our legal library:
+- Coal Mines Act, 1952
+- Coal Mines Regulation, 2017
+- Mines Creche Rules, 1966
+- Mine Vocational Training Rules, 1966
+- CBA Act, 1957
+- RandR Act, 2013
+- Explosives Act, 1884
+
+It also reflects general mining safety guidance and recognized hazards described in publicly available sources on mine safety and explosives.
+
+4. Policy commitments
+- Provide a safe and healthy workplace through risk-based controls.
+- Comply with all applicable legal requirements and permit conditions.
+- Continuously improve safety performance through audits, incident learning, and leadership engagement.
+- Ensure that all workers are competent, trained, and fit for duty.
+- Provide and maintain safe equipment, infrastructure, and work processes.
+
+5. Roles and responsibilities
+- Managing Director: Overall accountability for safety performance and resourcing.
+- Site Manager: Implementation of this policy and local procedures.
+- HSE Manager: Risk management, monitoring, training oversight, and reporting.
+- Supervisors: Task-level risk assessments and daily compliance.
+- Workers and Contractors: Follow procedures, use PPE, report hazards and incidents.
+
+6. Risk management
+- Identify and assess hazards using task-based risk assessments and job safety analyses.
+- Apply the hierarchy of controls: eliminate, substitute, engineer, administer, PPE.
+- Maintain a risk register and review it whenever conditions change.
+
+7. Training and competence
+- Mandatory induction for all site entrants.
+- Role-specific training for equipment operation, confined spaces, working at height, and emergency response.
+- Refresher training at scheduled intervals and after incidents.
+- Records maintained for all training and assessments.
+
+8. Core hazard controls
+8.1 Ground control and rock falls
+- Implement geotechnical assessments and ground support plans.
+- Inspect and scale as needed; restrict access to unsafe areas.
+
+8.2 Ventilation and gas management (underground)
+- Maintain engineered ventilation to control gases, heat, and dust.
+- Use gas monitoring and stop work on alarm thresholds.
+
+8.3 Dust and occupational hygiene
+- Control respirable dust via water sprays, enclosures, and filtration.
+- Conduct regular monitoring for respirable dust and silica.
+
+8.4 Noise
+- Apply engineering controls; provide hearing protection and monitoring.
+
+8.5 Mobile equipment and traffic management
+- Separate pedestrian and vehicle routes; enforce speed limits.
+- Maintain equipment inspections and operator authorization.
+
+8.6 Explosives (blasting)
+- Use licensed, authorized personnel and approved procedures only.
+- Secure storage, access control, and inventory tracking.
+- Establish blast exclusion zones, warning systems, and post-blast inspections.
+- Avoid any unapproved modification of explosives or detonators.
+
+8.7 Electrical and mechanical safety
+- Lockout/tagout for maintenance.
+- Guarding of moving parts and safe isolation practices.
+
+8.8 Heat stress
+- Implement work-rest schedules and hydration protocols.
+
+9. Emergency preparedness
+- Maintain emergency response plans for fire, explosion, ground fall, flooding, and medical events.
+- Conduct drills at planned intervals and after significant changes.
+- Ensure communication systems and muster procedures are tested.
+
+10. Incident reporting and investigation
+- Report all incidents, near misses, and unsafe conditions immediately.
+- Investigate root causes and implement corrective actions.
+- Share lessons learned across sites.
+
+11. Contractor management
+- Pre-qualify contractors for safety competence.
+- Align contractor procedures with site requirements.
+- Monitor contractor performance and corrective actions.
+
+12. Health surveillance
+- Provide occupational health monitoring for exposure to dust, noise, and heat.
+- Ensure medical fitness assessments for high-risk roles.
+
+13. Audit and continuous improvement
+- Conduct internal audits against this policy and legal requirements.
+- Track performance indicators and corrective action closure.
+
+14. Community and environmental interface
+- Minimize off-site impacts of blasting, dust, and noise.
+- Communicate with local communities and respond to concerns promptly.
+
+15. Policy governance
+- This policy is controlled by the HSE Department.
+- Deviations require written approval from the Site Manager and HSE Manager.
+
+References (internet sources used for general context)
+- https://en.wikipedia.org/wiki/Mine_safety
+- https://en.wikipedia.org/wiki/Explosive
+
+References (local legal library)
+- src/rag/data/laws/Coal_Mines_Act_1952.pdf
+- src/rag/data/laws/Coal_Mines_Regulation_2017.pdf
+- src/rag/data/laws/Mines Creche Rules, 1966.pdf
+- src/rag/data/laws/MineVocational Training Rules, 1966.pdf
+- src/rag/data/laws/CBA_Act_1957.pdf
+- src/rag/data/laws/RandR_act_2013.pdf
+- src/rag/data/laws/the_explosives_act_1884.pdf
