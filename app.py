@@ -1,5 +1,9 @@
 import streamlit as st
 
+from pages.chat import render_chat
+from pages.login import render_login
+from pages.registration import render_registration
+
 
 st.set_page_config(page_title="MineGuard")
 
@@ -60,71 +64,7 @@ def render_home() -> None:
 	st.markdown("[Go to Registration](/?page=reg)")
 	st.markdown("[Go to Login](/?page=login)")
 	st.markdown("[Go to Chat](/?page=chat)")
-
-
-def render_registration() -> None:
-	st.title("Registration")
-	with st.form("registration_form"):
-		st.text_input("User name")
-		st.text_input("Email ID")
-		st.text_input("Password", type="password")
-		submitted = st.form_submit_button("Submit")
-
-	if submitted:
-		st.success("Registration submitted.")
-
-
-def render_login() -> None:
-	st.title("Login")
-	with st.form("login_form"):
-		st.text_input("Email ID")
-		st.text_input("Password", type="password")
-		submitted = st.form_submit_button("Login")
-
-	if submitted:
-		st.success("Login submitted.")
-
-
-def render_chat() -> None:
-	st.title("MineGuard Chat")
-	st.caption("Ask questions about laws, policies, or incidents.")
-
-	if "chat_messages" not in st.session_state:
-		st.session_state.chat_messages = []
-
-	chat_container = st.container()
-	with chat_container:
-		for message in st.session_state.chat_messages:
-			role = message["role"]
-			content = message["content"]
-			bubble_class = "chat-user" if role == "user" else "chat-assistant"
-			st.markdown(
-				f"<div class='chat-bubble {bubble_class}'>{content}</div>",
-				unsafe_allow_html=True,
-			)
-
-	with st.form("chat_form", clear_on_submit=True):
-		input_col, button_col = st.columns([6, 1])
-		with input_col:
-			prompt = st.text_input(
-				"Message",
-				placeholder="Type your message...",
-				label_visibility="collapsed",
-			)
-		with button_col:
-			submitted = st.form_submit_button("Send")
-
-	if submitted and prompt.strip():
-		st.session_state.chat_messages.append(
-			{"role": "user", "content": prompt.strip()}
-		)
-		st.session_state.chat_messages.append(
-			{
-				"role": "assistant",
-				"content": "Thanks. I will respond once the backend is connected.",
-			}
-		)
-		st.rerun()
+	st.markdown("[Go to Incident Report](/?page=incident)")
 
 
 if page == "reg":
@@ -133,5 +73,8 @@ elif page == "login":
 	render_login()
 elif page == "chat":
 	render_chat()
+elif page == "incident":
+	from pages.incident_report import render_incident_report
+	render_incident_report()
 else:
 	render_home()
