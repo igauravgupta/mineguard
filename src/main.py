@@ -12,13 +12,10 @@ def main():
     reasoning_agent = LLMReasoningAgent()
     answer_agent = AnswerGeneratorAgent()
     queries = [
+        "We had a forklift accident at the warehouse.",
+        "What are the legal requirements for chemical storage?",
         "What training is required for mine workers?",
     ]
-    # queries = [
-    #     "We had a forklift accident at the warehouse.",
-    #     "What are the legal requirements for chemical storage?",
-    #     "What training is required for mine workers?",
-    # ]
 
     for query in queries:
         response = agent.detect_intent(query)

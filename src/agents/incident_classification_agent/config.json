@@ -1,0 +1,44 @@
+{
+  "incidentTypes": [
+    {
+      "name": "roof fall",
+      "severity": "high",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "gas exposure",
+      "severity": "high",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "equipment collision",
+      "severity": "medium",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "conveyor fire",
+      "severity": "high",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "explosives mishandling",
+      "severity": "high",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "haul truck incident",
+      "severity": "medium",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "rock burst",
+      "severity": "high",
+      "notify": ["itisgauravgupta@gmail.com"]
+    },
+    {
+      "name": "slip and fall",
+      "severity": "low",
+      "notify": ["itisgauravgupta@gmail.com"]
+    }
+  ]
+}
