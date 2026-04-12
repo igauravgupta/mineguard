@@ -12,6 +12,12 @@ class Constants:
     LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "")
     LOGGER_NAME = os.getenv("LOGGER_NAME", "mineguard")
 
+    SMTP_HOST = os.getenv("SMTP_HOST", "")
+    SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+    SMTP_USER = os.getenv("SMTP_USER", "")
+    SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
+    SMTP_FROM = os.getenv("SMTP_FROM", "")
+
     SRC_DIR = Path(__file__).resolve().parents[1]
     BASE_DIR = SRC_DIR.parent
     LAWS_DIR = SRC_DIR / "rag" / "data" / "laws"
