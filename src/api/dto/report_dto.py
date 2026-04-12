@@ -1,12 +1,7 @@
 from typing import Any, Dict
 
-from config.logger import get_logger
+from api.services.report_service import save_report_to_db
 
 
-logger = get_logger(__name__)
-
-
-def save_report(report: Dict[str, Any]) -> bool:
-    logger.info("Saving report to database (dummy)")
-    logger.debug("Report payload: %s", report)
-    return True
+def save_report(report: Dict[str, Any]) -> Dict[str, Any]:
+    return save_report_to_db(report)

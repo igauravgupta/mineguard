@@ -1,4 +1,5 @@
 import base64
+import time
 
 import requests
 import streamlit as st
@@ -44,8 +45,30 @@ def render_incident_report() -> None:
                 )
                 if response.status_code != 200:
                     st.error(f"API error: {response.status_code} {response.text}")
-                else:
-                    st.success("Incident report submitted.")
-                    st.json(response.json())
+                    return
+
+                job = response.json()
+                report_id = job.get("id")
+                st.info(f"Processing report id: {report_id}")
+
+                status_url = f"{api_base_url.rstrip('/')}/reports/{report_id}"
+                for _ in range(10):
+                    status_response = requests.get(status_url, timeout=10)
+                    if status_response.status_code != 200:
+                        st.error(
+                            f"Status error: {status_response.status_code} {status_response.text}"
+                        )
+                        return
+                    payload = status_response.json()
+                    if payload.get("status") in {"Active", "completed"}:
+                        st.success("Incident report completed.")
+                        st.json(payload)
+                        return
+                    if payload.get("status") == "failed":
+                        st.error(payload.get("error", "Incident processing failed"))
+                        return
+                    time.sleep(2)
+
+                st.warning("Still processing. Please retry in a moment.")
             except Exception as exc:
                 st.error(f"API request failed: {exc}")

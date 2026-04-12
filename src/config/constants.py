@@ -18,6 +18,12 @@ class Constants:
     SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
     SMTP_FROM = os.getenv("SMTP_FROM", "")
 
+    MONGO_URI = os.getenv("MONGO_URI", "")
+    MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "mineguard")
+    MONGO_REPORTS_COLLECTION = os.getenv("MONGO_REPORTS_COLLECTION", "incident_reports")
+
+    REPORT_API_BASE_URL = os.getenv("REPORT_API_BASE_URL", "http://localhost:8000")
+
     SRC_DIR = Path(__file__).resolve().parents[1]
     BASE_DIR = SRC_DIR.parent
     LAWS_DIR = SRC_DIR / "rag" / "data" / "laws"

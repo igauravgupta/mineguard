@@ -16,7 +16,13 @@ class SmtpClientAdapter:
         self.password = Constants.SMTP_PASSWORD
         self.sender = Constants.SMTP_FROM
 
-    def send_email(self, recipients: list[str], subject: str, body: str) -> bool:
+    def send_email(
+        self,
+        recipients: list[str],
+        subject: str,
+        body: str,
+        html_body: str | None = None,
+    ) -> bool:
         if not recipients:
             self.logger.warning("No recipients provided for email")
             return False
@@ -29,6 +35,8 @@ class SmtpClientAdapter:
         message["From"] = self.sender
         message["To"] = ", ".join(recipients)
         message.set_content(body)
+        if html_body:
+            message.add_alternative(html_body, subtype="html")
 
         try:
             with smtplib.SMTP(self.host, self.port) as server:

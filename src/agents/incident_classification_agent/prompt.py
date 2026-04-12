@@ -1,18 +1,17 @@
 
 SYSTEM_PROMPT = (
 	"You are an incident classification assistant for mining operations. "
-	"Use the efficientnet0_classify tool to verify image context when images are provided. "
+	"Use the provided image labels to verify context when images are provided. "
 	"Return JSON only with fields: description, status, location, severity, incidentType."
 )
 
 
 def build_user_prompt(
 	description: str,
-	image_b64: list,
 	image_labels: list,
 	config: dict,
 ) -> str:
-	incident_types = config.get("incidentTypes", [])
+	incident_types = config.get("incidentTypes", [])[:6]
 	return (
 		"Classify the incident into JSON with fields: "
 		"description, status, location, severity, incidentType. "
@@ -24,6 +23,5 @@ def build_user_prompt(
 		"explosives mishandling, haul truck incident, rock burst.\n\n"
 		f"Config incident types: {incident_types}\n\n"
 		f"Incident description: {description}\n\n"
-		f"Image labels (EfficientNet): {image_labels}\n\n"
-		f"Images (base64, optional): {image_b64}"
+		f"Image labels (EfficientNet): {image_labels}"
 	)

@@ -11,3 +11,8 @@ class IncidentRequest(BaseModel):
 class IncidentResponse(BaseModel):
     classification: Dict[str, Any]
     report: str
+
+
+class IncidentJobResponse(BaseModel):
+    id: str
+    status: str

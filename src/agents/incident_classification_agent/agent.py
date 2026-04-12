@@ -5,8 +5,6 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from langchain.agents import create_agent
-
 from config.logger import get_logger
 from providers.llm import LLMProvider
 from agents.incident_classification_agent.prompt import SYSTEM_PROMPT, build_user_prompt
@@ -47,6 +45,26 @@ def _strip_json_fences(text: str) -> str:
 	return cleaned
 
 
+def _extract_json_block(text: str) -> str:
+	cleaned = _strip_json_fences(text)
+	if cleaned.startswith("{") and cleaned.endswith("}"):
+		return cleaned
+	start = cleaned.find("{")
+	end = cleaned.rfind("}")
+	if start != -1 and end != -1 and end > start:
+		return cleaned[start : end + 1]
+	return cleaned
+
+
+def _parse_first_json_object(text: str) -> Dict[str, Any]:
+	decoder = json.JSONDecoder()
+	cleaned = _extract_json_block(text)
+	obj, _ = decoder.raw_decode(cleaned)
+	if not isinstance(obj, dict):
+		raise ValueError("Classification JSON is not an object")
+	return obj
+
+
 def _load_config() -> Dict[str, Any]:
 	config_path = Path(__file__).with_name("config.json")
 	try:
@@ -71,11 +89,6 @@ class ClassifyIncidentAgent:
 		self.logger = get_logger(__name__)
 		self.llm = LLMProvider()
 		self.config = _load_config()
-		self.agent = create_agent(
-			model=self.llm.get_chat_model(),
-			tools=[efficientnet0_classify],
-			system_prompt=SYSTEM_PROMPT,
-		)
 
 	def classify(
 		self,
@@ -86,6 +99,7 @@ class ClassifyIncidentAgent:
 			self.logger.error("Missing incident description")
 			return None
 
+		trimmed_description = description.strip()[:1500]
 		image_b64 = _encode_images_base64(images or [])
 		try:
 			image_labels = efficientnet0_classify.invoke({"images_b64": image_b64})
@@ -94,24 +108,27 @@ class ClassifyIncidentAgent:
 			image_labels = []
 
 		prompt = build_user_prompt(
-			description=description,
-			image_b64=image_b64,
+			description=trimmed_description,
 			image_labels=image_labels,
 			config=self.config,
 		)
 
 		try:
-			result = self.agent.invoke(
-				{"messages": [{"role": "user", "content": prompt}]}
+			chat_model = self.llm.get_chat_model()
+			result = chat_model.invoke(
+				[
+					{"role": "system", "content": SYSTEM_PROMPT},
+					{"role": "user", "content": prompt},
+				]
 			)
-			output = result.get("output", "")
-			if not output and isinstance(result.get("messages"), list):
-				last_message = result["messages"][-1]
-				output = getattr(last_message, "content", "") or last_message.get(
-					"content", ""
+			output = getattr(result, "content", "") or ""
+			if not output:
+				self.logger.error(
+					"LLM returned empty classification response (tool_calls=%s)",
+					getattr(result, "tool_calls", None),
 				)
-			cleaned = _strip_json_fences(output)
-			payload = json.loads(cleaned)
+				return None
+			payload = _parse_first_json_object(output)
 
 			incident_type = str(payload.get("incidentType", "")).strip()
 			config_entry = _lookup_incident_config(self.config, incident_type)
